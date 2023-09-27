@@ -1,0 +1,129 @@
+,Unnamed: 0.2,Unnamed: 0.1,Unnamed: 0,Structural characteristic,Levenshtein distance,Count
+0,0,0,0,Buried,1,1804
+1,1,1,1,Buried,2,33059
+2,2,2,2,Buried,3,134493
+3,3,3,3,Buried,4,281080
+4,4,4,4,Buried,5,381430
+5,5,5,5,Buried,6,370956
+6,6,6,6,Buried,7,275933
+7,7,7,7,Buried,8,163997
+8,8,8,8,Buried,9,80805
+9,9,9,9,Buried,10,33354
+10,10,10,10,Buried,11,11243
+11,11,11,11,Buried,12,2992
+12,12,12,12,Buried,13,660
+13,13,13,13,Buried,14,97
+14,14,14,14,Buried,15,0
+15,15,15,15,Buried,16,0
+16,16,16,16,Exposed,1,2272
+17,17,17,17,Exposed,2,38685
+18,18,18,18,Exposed,3,142274
+19,19,19,19,Exposed,4,269757
+20,20,20,20,Exposed,5,341815
+21,21,21,21,Exposed,6,330018
+22,22,22,22,Exposed,7,254036
+23,23,23,23,Exposed,8,156528
+24,24,24,24,Exposed,9,78469
+25,25,25,25,Exposed,10,32296
+26,26,26,26,Exposed,11,10805
+27,27,27,27,Exposed,12,2992
+28,28,28,28,Exposed,13,677
+29,29,29,29,Exposed,14,112
+30,30,30,30,Exposed,15,16
+31,31,31,31,Exposed,16,1
+32,32,32,32,Many contacts,1,2183
+33,33,33,33,Many contacts,2,40088
+34,34,34,34,Many contacts,3,155650
+35,35,35,35,Many contacts,4,300828
+36,36,36,36,Many contacts,5,372060
+37,37,37,37,Many contacts,6,328201
+38,38,38,38,Many contacts,7,220145
+39,39,39,39,Many contacts,8,118167
+40,40,40,40,Many contacts,9,53678
+41,41,41,41,Many contacts,10,20984
+42,42,42,42,Many contacts,11,6771
+43,43,43,43,Many contacts,12,1700
+44,44,44,44,Many contacts,13,374
+45,45,45,45,Many contacts,14,71
+46,46,46,46,Many contacts,15,0
+47,47,47,47,Many contacts,16,0
+48,48,48,48,Few contacts,1,1871
+49,49,49,49,Few contacts,2,31715
+50,50,50,50,Few contacts,3,122097
+51,51,51,51,Few contacts,4,251690
+52,52,52,52,Few contacts,5,350340
+53,53,53,53,Few contacts,6,367886
+54,54,54,54,Few contacts,7,305421
+55,55,55,55,Few contacts,8,203236
+56,56,56,56,Few contacts,9,109470
+57,57,57,57,Few contacts,10,47535
+58,58,58,58,Few contacts,11,16533
+59,59,59,59,Few contacts,12,4586
+60,60,60,60,Few contacts,13,999
+61,61,61,61,Few contacts,14,160
+62,62,62,62,Few contacts,15,20
+63,63,63,63,Few contacts,16,1
+64,64,64,64,Close to active site,1,1725
+65,65,65,65,Close to active site,2,32572
+66,66,66,66,Close to active site,3,128013
+67,67,67,67,Close to active site,4,250866
+68,68,68,68,Close to active site,5,328085
+69,69,69,69,Close to active site,6,321491
+70,70,70,70,Close to active site,7,246668
+71,71,71,71,Close to active site,8,152188
+72,72,72,72,Close to active site,9,77488
+73,73,73,73,Close to active site,10,32409
+74,74,74,74,Close to active site,11,11279
+75,75,75,75,Close to active site,12,3235
+76,76,76,76,Close to active site,13,730
+77,77,77,77,Close to active site,14,109
+78,78,78,78,Close to active site,15,13
+79,79,79,79,Close to active site,16,0
+80,80,80,80,Distant to active site,1,2352
+81,81,81,81,Distant to active site,2,39209
+82,82,82,82,Distant to active site,3,149175
+83,83,83,83,Distant to active site,4,301499
+84,84,84,84,Distant to active site,5,396439
+85,85,85,85,Distant to active site,6,380207
+86,86,86,86,Distant to active site,7,282982
+87,87,87,87,Distant to active site,8,168979
+88,88,88,88,Distant to active site,9,82027
+89,89,89,89,Distant to active site,10,32796
+90,90,90,90,Distant to active site,11,10719
+91,91,91,91,Distant to active site,12,2859
+92,92,92,92,Distant to active site,13,581
+93,93,93,93,Distant to active site,14,93
+94,94,94,94,Distant to active site,15,9
+95,95,95,95,Distant to active site,16,0
+96,96,96,96,Part of helix or sheet,1,1836
+97,97,97,97,Part of helix or sheet,2,34259
+98,98,98,98,Part of helix or sheet,3,139060
+99,99,99,99,Part of helix or sheet,4,289464
+100,100,100,100,Part of helix or sheet,5,394651
+101,101,101,101,Part of helix or sheet,6,395815
+102,102,102,102,Part of helix or sheet,7,309579
+103,103,103,103,Part of helix or sheet,8,193566
+104,104,104,104,Part of helix or sheet,9,98773
+105,105,105,105,Part of helix or sheet,10,41606
+106,106,106,106,Part of helix or sheet,11,14217
+107,107,107,107,Part of helix or sheet,12,4039
+108,108,108,108,Part of helix or sheet,13,854
+109,109,109,109,Part of helix or sheet,14,130
+110,110,110,110,Part of helix or sheet,15,12
+111,111,111,111,Part of helix or sheet,16,0
+112,112,112,112,Part of loop,1,2234
+113,113,113,113,Part of loop,2,37400
+114,114,114,114,Part of loop,3,137680
+115,115,115,115,Part of loop,4,261975
+116,116,116,116,Part of loop,5,329557
+117,117,117,117,Part of loop,6,305605
+118,118,118,118,Part of loop,7,222084
+119,119,119,119,Part of loop,8,130074
+120,120,120,120,Part of loop,9,62664
+121,121,121,121,Part of loop,10,24939
+122,122,122,122,Part of loop,11,8165
+123,123,123,123,Part of loop,12,2197
+124,124,124,124,Part of loop,13,472
+125,125,125,125,Part of loop,14,75
+126,126,126,126,Part of loop,15,10
+127,127,127,127,Part of loop,16,0

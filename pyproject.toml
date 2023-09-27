@@ -1,0 +1,37 @@
+[project]
+name = "predictability"
+description = """Small project containing model definitions and utilities for
+reproducing the results of the paper "What makes the effect of protein mutations hard
+to predict?" """
+version = "0.1.0"
+authors = [
+    {name = "Floris van der Flier", email = "floris.vanderflier@wur.nl"},
+    {name="Henning Redestig", email = "henning.redestig@iff.com"}
+]
+dependencies = [
+    "biopandas",
+    "biopython",
+    "biotite",
+    "jupyter",
+    "loguru",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "plotnine",
+    "prody",
+    "scikit-learn",
+    "scipy",
+    "torch",
+    "tqdm",
+    "transformers",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = [
+  "setuptools>=42",
+  "wheel"
+]
+build-backend = "setuptools.build_meta"
