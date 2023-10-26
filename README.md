@@ -7,7 +7,7 @@ figures of the recently released preprint
 - [System requirements](#system-requirements)
 - [Project structure](#project-structure)
 - [Install instructions](#install-instructions)
-- [Reproducibility](#re)
+- [Reproducibility](#reproducibility)
 
 
 # System requirements
