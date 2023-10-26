@@ -3,6 +3,8 @@ name = "predictability"
 description = """Small project containing model definitions and utilities for
 reproducing the results of the paper "What makes the effect of protein mutations hard
 to predict?" """
+readme = "README.md"
+requires-python = ">=3.8"
 version = "0.1.0"
 authors = [
     {name = "Floris van der Flier", email = "floris.vanderflier@wur.nl"},

@@ -144,12 +144,13 @@ class PottsRegressor:
 
 
 class RITARegressor:
-    def __init__(self, top_model_type="ridge", top_model_kwargs={}):
+    def __init__(self, top_model_type="ridge", device="cpu", top_model_kwargs={}):
         self.top_model_type = top_model_type
+        self.device = device
         self.top_model_kwargs = top_model_kwargs
         self.model = AutoModelForCausalLM.from_pretrained(
             "lightonai/RITA_xl", trust_remote_code=True
-        )
+        ).to(device)
         self.tokenizer = AutoTokenizer.from_pretrained("lightonai/RITA_xl")
         self.embed_dim = 2048
         self.top_model = {
@@ -168,9 +169,11 @@ class RITARegressor:
         for i, sequence in tqdm(enumerate(data["sequence"])):
             with torch.no_grad():
                 for j, p in enumerate([sequence, sequence[::-1]]):
-                    tokenized_sequence = torch.tensor([self.tokenizer.encode(p)])
+                    tokenized_sequence = torch.tensor(
+                        [self.tokenizer.encode(p)], device=self.device
+                    )
                     input_tokens = tokenized_sequence
-                    outputs = self.model(input_tokens).hidden_states[:, -2, :]
+                    outputs = self.model(input_tokens).hidden_states[:, -2, :].cpu()
                     embeddings[
                         i, self.embed_dim * j : self.embed_dim * (j + 1)
                     ] = outputs
