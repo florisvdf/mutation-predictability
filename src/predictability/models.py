@@ -1,5 +1,5 @@
 from tqdm import tqdm
-from typing import List
+from typing import List, Union
 import re
 from loguru import logger
 from pathlib import Path
@@ -16,7 +16,7 @@ from sklearn.ensemble import ExtraTreesRegressor
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-from predictability.constants import AA_ALPHABET
+from predictability.constants import AA_ALPHABET, AA_ALPHABET_GREMLIN
 
 
 class PottsModel:
@@ -26,7 +26,6 @@ class PottsModel:
     def __init__(self, hi: np.array = None, jij: np.array = None):
         self.hi = hi
         self.jij = jij
-        self.alphabet = list("ARNDCQEGHILKMFPSTWYV-")
 
     def run_gremlin(self, msa_path: str):
         if msa_path.endswith("a2m"):
@@ -88,7 +87,7 @@ class PottsModel:
         return formatted_msa_path
 
     def tokenize(self, letter):
-        return self.alphabet.index(letter)
+        return AA_ALPHABET_GREMLIN.index(letter)
 
     def embed(self, sequences: List[str]):
         tokenized_sequences = []
@@ -110,6 +109,16 @@ class PottsModel:
         embeddings = np.transpose(np.array(embeddings), (2, 0, 1))
         return embeddings
 
+    def predict(self, sequences: Union[pd.DataFrame, List[str]]):
+        if isinstance(sequences, pd.DataFrame):
+            sequences = sequences["sequence"]
+        embeddings = self.embed(sequences)
+        predictions = self._calculate_sequence_energy(embeddings)
+        return predictions
+
+    def _calculate_sequence_energy(self, embeddings):
+        return np.sum(embeddings, axis=(1, 2))
+
     @classmethod
     def load(cls, model_directory: str) -> "PottsModel":
         instance = cls(
@@ -120,27 +129,68 @@ class PottsModel:
 
 
 class PottsRegressor:
-    def __init__(self, potts_path=None, msa_path=None, regressor_type="ridge"):
+    def __init__(
+        self,
+        potts_path: Union[Path, str] = None,
+        msa_path: Union[Path, str] = None,
+        encoder: str = "energies",
+        regressor_type: str = "ridge",
+    ):
+        self.potts_path = potts_path
+        self.msa_path = msa_path
+        self.encoder = encoder
+        self.regressor_type = regressor_type
         if msa_path is not None:
             logger.info("Running Gremlin locally and saving emission parameters")
             self.potts_model = PottsModel()
-            self.potts_model.run_gremlin(msa_path=msa_path)
-        elif potts_path is not None:
-            logger.info(f"Loading Potts model locally from: {potts_path}")
-            self.potts_model = PottsModel.load(potts_path)
+            self.potts_model.run_gremlin(msa_path=self.msa_path)
+        elif self.potts_path is not None:
+            logger.info(f"Loading Potts model locally from: {self.potts_path}")
+            self.potts_model = PottsModel.load(self.potts_path)
         self.top_model = {"ridge": Ridge(), "extra_trees": ExtraTreesRegressor()}[
-            regressor_type
+            self.regressor_type
         ]
 
-    def fit(self, data, property):
-        embeddings = self.potts_model.embed(data["sequence"])
-        residue_energies = np.sum(embeddings, axis=2)
-        self.top_model.fit(residue_energies, data[property])
+    def fit(
+        self,
+        sequences: Union[List[str], pd.Series],
+        targets: Union[np.array, pd.Series],
+    ):
+        encodings = self.encode(sequences)
+        self.top_model.fit(encodings, targets)
 
-    def predict(self, data):
-        embeddings = self.potts_model.embed(data["sequence"])
+    def encode(self, sequences: Union[List[str], pd.Series]):
+        return {
+            "energies": self.compute_residue_energies,
+            "augmented": self.compute_augmentation,
+        }[self.encoder](sequences)
+
+    def compute_residue_energies(self, sequences: Union[List[str], pd.Series]):
+        embeddings = self.potts_model.embed(sequences)
         residue_energies = np.sum(embeddings, axis=2)
-        return self.top_model.predict(residue_energies)
+        return residue_energies
+
+    def compute_augmentation(self, sequences: Union[List[str], pd.Series]):
+        sequence_densities = self.potts_model.predict(sequences)
+        one_hot_encodings = self.encode_sequences_one_hot(sequences).reshape(
+            len(sequences), -1
+        )
+        return np.hstack((one_hot_encodings, sequence_densities.reshape(-1, 1)))
+
+    @staticmethod
+    def encode_sequences_one_hot(sequences: Union[List[str], pd.Series]):
+        return np.array(
+            [
+                np.array(
+                    [np.eye(len(AA_ALPHABET))[AA_ALPHABET.index(aa)] for aa in sequence]
+                )
+                for sequence in sequences
+            ]
+        )
+
+    def predict(self, sequences: Union[List[str], pd.Series]):
+        encodings = self.encode(sequences)
+        return self.top_model.predict(encodings)
 
 
 class RITARegressor:
@@ -161,8 +211,9 @@ class RITARegressor:
 
     def embed(self, data):
         """
-        The tokenizer creates a tokenized sequence of length len(sequence) + 1. No BOS token is created, but there is an
-        EOS token. Embeddings are extracted by taking hidden_states[:, -2, :] (so only the hidden state of the last residue).
+        The tokenizer creates a tokenized sequence of length len(sequence) + 1.
+        No BOS token is created, but there is an EOS token. Embeddings are extracted by
+        taking hidden_states[:, -2, :] (so only the hidden state of the last residue).
         """
         embeddings_shape = (len(data), 2 * self.embed_dim)
         embeddings = np.empty(embeddings_shape)

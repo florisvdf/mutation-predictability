@@ -1,6 +1,7 @@
 from pathlib import Path
 
 AA_ALPHABET = list("ACDEFGHIKLMNPQRSTVWY")
+AA_ALPHABET_GREMLIN = list("ARNDCQEGHILKMFPSTWYV-")
 BINARY_RESIDUE_FEATURES = [
     "is_buried",
     "is_connected",
