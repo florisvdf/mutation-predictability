@@ -179,15 +179,15 @@ class RITARegressor:
                     ] = outputs
         return embeddings
 
-    def fit(self, data, property, embeddings=None, batch_size=8):
+    def fit(self, data, property, embeddings=None):
         if embeddings is None:
-            embeddings = self.embed(data, batch_size)
+            embeddings = self.embed(data)
         logger.info(f"Fitting {self.top_model_type}")
         self.top_model.fit(embeddings, data[property])
 
-    def predict(self, data, embeddings=None, batch_size=8):
+    def predict(self, data, embeddings=None):
         if embeddings is None:
-            embeddings = self.embed(data, batch_size)
+            embeddings = self.embed(data)
         return self.top_model.predict(embeddings)
 
 
