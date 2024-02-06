@@ -194,8 +194,15 @@ class PottsRegressor:
 
 
 class RITARegressor:
-    def __init__(self, top_model_type="ridge", device="cpu", top_model_kwargs={}):
+    def __init__(
+        self,
+        top_model_type="ridge",
+        pooling: str = "mean",
+        device="cpu",
+        **top_model_kwargs,
+    ):
         self.top_model_type = top_model_type
+        self.pooling = pooling
         self.device = device
         self.top_model_kwargs = top_model_kwargs
         self.model = AutoModelForCausalLM.from_pretrained(
@@ -212,8 +219,10 @@ class RITARegressor:
     def embed(self, data):
         """
         The tokenizer creates a tokenized sequence of length len(sequence) + 1.
-        No BOS token is created, but there is an EOS token. Embeddings are extracted by
-        taking hidden_states[:, -2, :] (so only the hidden state of the last residue).
+        No BOS token is created, but there is an EOS token. When using pooling option
+        'last', embeddings are extracted by taking hidden_states[:, -2, :]
+        (so only the hidden state of the last residue). When using option 'mean',
+        embeddings are extracting by taking the mean of the second hidden states' axis.
         """
         embeddings_shape = (len(data), 2 * self.embed_dim)
         embeddings = np.empty(embeddings_shape)
@@ -223,12 +232,23 @@ class RITARegressor:
                     tokenized_sequence = torch.tensor(
                         [self.tokenizer.encode(p)], device=self.device
                     )
-                    input_tokens = tokenized_sequence
-                    outputs = self.model(input_tokens).hidden_states[:, -2, :].cpu()
+                    outputs = self.embed_tokenized_sequence(tokenized_sequence)
                     embeddings[
                         i, self.embed_dim * j : self.embed_dim * (j + 1)
                     ] = outputs
         return embeddings
+
+    def embed_tokenized_sequence(self, tokenized_sequence: torch.tensor):
+        return {
+            "mean": self.extract_mean_pooled_embeddings,
+            "last": self.extract_last_hidden_state_embeddings,
+        }[self.pooling](tokenized_sequence)
+
+    def extract_mean_pooled_embeddings(self, tokenized_sequence: torch.tensor):
+        return torch.mean(self.model(tokenized_sequence).hidden_states, dim=1).cpu()
+
+    def extract_last_hidden_state_embeddings(self, tokenized_sequence: torch.tensor):
+        return self.model(tokenized_sequence).hidden_states[:, -2, :].cpu()
 
     def fit(self, data, property, embeddings=None):
         if embeddings is None:
