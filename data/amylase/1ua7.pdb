@@ -20,6 +20,7 @@ SOURCE   8 EXPRESSION_SYSTEM_PLASMID: PNQ356
 KEYWDS    BETA-ALPHA-BARRELS, ACARBOSE, GREEK-KEY MOTIF, HYDROLASE              
 EXPDTA    X-RAY DIFFRACTION                                                     
 AUTHOR    M.KAGAWA,Z.FUJIMOTO,M.MOMMA,K.TAKASE,H.MIZUNO                         
+REVDAT   7   27-DEC-23 1UA7    1       REMARK                                   
 REVDAT   6   10-NOV-21 1UA7    1       SEQADV HETSYN                            
 REVDAT   5   29-JUL-20 1UA7    1       COMPND REMARK HETNAM LINK                
 REVDAT   5 2                   1       SITE   ATOM                              

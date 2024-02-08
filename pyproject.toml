@@ -17,6 +17,7 @@ dependencies = [
     "jupyter",
     "loguru",
     "matplotlib",
+    "nglview",
     "numpy",
     "pandas",
     "plotnine",

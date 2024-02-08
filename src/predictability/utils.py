@@ -1,8 +1,14 @@
 import math
 import os
 import re
+import requests
 from pathlib import Path
-from typing import Union
+from typing import Union, List
+from loguru import logger
+from dataclasses import dataclass
+import prody
+from biopandas.pdb import PandasPdb
+from biotite.sequence import ProteinSequence
 from biotite.sequence.io.fasta import FastaFile
 from Bio.PDB import PDBParser
 import pandas as pd
@@ -12,11 +18,141 @@ from scipy.spatial import ConvexHull
 from predictability.constants import BINARY_RESIDUE_FEATURES
 
 
+class StructuralCharacterizer:
+    def __init__(
+        self,
+        filename: str,
+        active_site_residues: List[int],
+        reference_sequence: str = None,
+    ):
+        self.filename = filename
+        self.reference_sequence = reference_sequence
+        self.active_site_residues = active_site_residues
+        self.structure = (
+            PandasPdb()
+            .read_pdb(self.filename)
+            .df["ATOM"]
+            .query('alt_loc == "" or alt_loc == "A"')
+        )
+        self.residue_characteristics = (
+            self.structure[["residue_number", "residue_name"]]
+            .drop_duplicates()
+            .assign(
+                residue_name=lambda d: d.residue_name.apply(
+                    ProteinSequence.convert_letter_3to1
+                )
+            )
+        )
+        self.assign_buriedness()
+        self.assign_number_of_contacts()
+        self.assign_distance_to_active_site()
+        self.assign_secondary_structure()
+        self.binarize_structural_characteristics()
+
+    @staticmethod
+    def coord_distance(atom1: pd.Series, atom2: pd.Series):
+        return math.sqrt(
+            (atom1.x_coord - atom2.x_coord) ** 2
+            + (atom1.y_coord - atom2.y_coord) ** 2
+            + (atom1.z_coord - atom2.z_coord) ** 2
+        )
+
+    @staticmethod
+    def distance_to_active_site(ca, active_site):
+        return min(coord_distance(ca, a) for a in active_site)
+
+    def assign_buriedness(self):
+        buriedness = get_buriedness(self.filename).loc[
+            lambda d: (d.chain_id == "A") & (~d.residue_name.isin(["HOH", "ACI", "CA"]))
+        ]
+        self.residue_characteristics = self.residue_characteristics.merge(
+            buriedness[["residue_number", "buriedness"]], on=["residue_number"]
+        )
+
+    def assign_number_of_contacts(self):
+        ca_atoms = (
+            self.structure.loc[lambda d: d.atom_name == "CA"]
+            .copy()
+            .assign(contacts=np.nan)[
+                ["residue_number", "contacts", "x_coord", "y_coord", "z_coord"]
+            ]
+            .set_index("residue_number")
+        )
+        for ca in ca_atoms.itertuples():
+            contacts = 0
+            for other in ca_atoms.itertuples():
+                if ca.Index != other.Index:
+                    dist = coord_distance(ca, other)
+                    if dist < 7.3:
+                        contacts += 1
+            ca_atoms.loc[ca.Index, "contacts"] = contacts
+        self.residue_characteristics = self.residue_characteristics.merge(
+            ca_atoms.reset_index()[["residue_number", "contacts"]]
+        )
+
+    def assign_distance_to_active_site(self):
+        active_site = list(
+            self.structure.loc[
+                lambda d: (d.residue_number.isin(self.active_site_residues))
+                & (d.atom_name == "CA")
+            ].itertuples()
+        )
+        as_distances = (
+            self.structure.loc[lambda d: d.atom_name == "CA"]
+            .copy()[["residue_number", "x_coord", "y_coord", "z_coord"]]
+            .set_index("residue_number")
+        )
+        as_distances["distance_to_active_site"] = [
+            self.distance_to_active_site(ca, active_site)
+            for ca in as_distances.itertuples()
+        ]
+        self.residue_characteristics = self.residue_characteristics.merge(
+            as_distances.reset_index()[["residue_number", "distance_to_active_site"]]
+        )
+
+    def assign_secondary_structure(self):
+        _, header = prody.parsePDB(self.filename, header=True)
+        residues = self.structure.loc[lambda d: d.atom_name == "CA"].copy()[
+            ["residue_number"]
+        ]
+        ranges = [
+            Range(start, stop)
+            for _, _, _, _, start, stop in header["helix_range"] + header["sheet_range"]
+        ]
+        residues["is_secondary"] = [
+            any(v in r for r in ranges) for v in self.structure.residue_number.unique()
+        ]
+        self.residue_characteristics = self.residue_characteristics.merge(residues)
+
+    def binarize_structural_characteristics(self):
+        self.residue_characteristics["is_buried"] = (
+            self.residue_characteristics.buriedness
+            > self.residue_characteristics.buriedness.quantile(1 - 1 / 2)
+        ).astype(bool)
+        self.residue_characteristics["is_connected"] = (
+            self.residue_characteristics.contacts
+            > self.residue_characteristics.contacts.quantile(1 - 1 / 2)
+        ).astype(bool)
+        self.residue_characteristics["is_close_to_as"] = (
+            self.residue_characteristics.distance_to_active_site
+            < self.residue_characteristics.distance_to_active_site.quantile(1 - 1 / 2)
+        ).astype(bool)
+
+
+@dataclass
+class Range:
+    start: int
+    stop: int
+
+    def __contains__(self, value):
+        return self.stop >= value >= self.start
+
+
 def read_fasta(path: Union[str, Path]):
     return FastaFile.read(str(path))
 
 
-def distance(one, other):
+def coord_distance(one: pd.Series, other: pd.Series):
     return math.sqrt(
         (one.x_coord - other.x_coord) ** 2
         + (one.y_coord - other.y_coord) ** 2
@@ -25,7 +161,13 @@ def distance(one, other):
 
 
 def dist_to_active_site(ca, active_site):
-    return min(distance(ca, a) for a in active_site)
+    return min(coord_distance(ca, a) for a in active_site)
+
+
+def download_pdb(pdb_id: str, path: Union[str, Path]):
+    response = requests.get(f"https://files.rcsb.org/view/{pdb_id}.pdb")
+    with open(Path(path) / f"{pdb_id}.pdb", "w") as f:
+        f.write(response.text)
 
 
 def assign_classes(data, feature_table, mutation_col="mutation", features="all"):
@@ -165,3 +307,96 @@ def sel_kfold(data, position_col="residue_number", k=10):
             train_indices = np.concatenate((train_indices, fold_train_indices))
         k_indices.append((train_indices.astype(int), val_indices.astype(int)))
     return k_indices
+
+
+class ProteinGym:
+    """
+    Currently only support for substitutions.
+    """
+
+    def __init__(self, proteingym_location, meta_data_path):
+        self.proteingym_location = proteingym_location
+        self.meta_data_path = meta_data_path
+        self.reference_information = pd.read_csv(self.meta_data_path, index_col=None)
+        self.available_pdbs = {}
+
+    def update_reference_information(self):
+        logger.info("Updating reference information with structure information.")
+        pdb_entry_pattern = r".*PDB; [A-Z0-9]{4};.*"
+        active_site_pattern = r".*ACT_SITE.*"
+        region_pattern = r"A=(\d+-\d+)"
+        for i, row in self.reference_information.iterrows():
+            uniprot_id = row["UniProt_ID"]
+            region_mutated = row["region_mutated"]
+            response = requests.get(
+                f"https://rest.uniprot.org/uniprotkb/{uniprot_id}.txt"
+            )
+            if response.status_code == 400:
+                continue
+            body = response.text
+            pdb_entries = list(
+                filter(
+                    lambda x: True if re.match(pdb_entry_pattern, x) else False,
+                    body.split("\n"),
+                )
+            )
+            active_site_entries = list(
+                filter(
+                    lambda x: True if re.match(active_site_pattern, x) else False,
+                    body.split("\n")
+                )
+            )
+            active_site_residues = "-".join(map(lambda x: x.split()[-1], active_site_entries))
+            uniprot_sequence = fetch_uniprot_sequence(uniprot_id)
+            self.available_pdbs[uniprot_id] = pdb_entries
+            self.reference_information.loc[i, "has_pdb_structure"] = (
+                len(pdb_entries) > 0
+            )
+            self.reference_information.loc[i, "structure_covers_mutated_region"] = False
+            self.reference_information.loc[i, "uniprot_sequence"] = uniprot_sequence
+            self.reference_information.loc[i, "active_site"] = active_site_residues
+            for entry in pdb_entries:
+                match = re.search(region_pattern, entry)
+                if match:
+                    structure_region = match.group(1)
+                    structure_covers_mutated_region = region_is_subregion(
+                        region_mutated, structure_region
+                    )
+                    if structure_covers_mutated_region:
+                        self.reference_information.loc[
+                            i, "structure_covers_mutated_region"
+                        ] = True
+                        break
+
+    def describe_dataset(self, dataset_name):
+        return self.reference_information[
+            self.reference_information["DMS_id"] == dataset_name
+        ]
+
+    def fetch_msa(self, dataset_name):
+        uniprot_id = self.describe_dataset(dataset_name)["UniProt_ID"].values[0]
+        matching_msa_paths = list(
+            (Path(self.proteingym_location) / "MSA_files/DMS").rglob(f"{uniprot_id}*")
+        )
+        logger.info(f"Found {len(matching_msa_paths)} matching MSA files")
+        return read_fasta(matching_msa_paths[0])
+
+    def prepare_dataset(self, dataset_name):
+        data = pd.read_csv(
+            Path(self.proteingym_location)
+            / f"cv_folds_singles_substitutions/{dataset_name}.csv"
+        ).rename(columns={"mutated_sequence": "sequence"})
+        return data
+
+
+def fetch_uniprot_sequence(uniprot_id: str):
+    response = requests.get(f"https://rest.uniprot.org/uniprotkb/{uniprot_id}.fasta")
+    body = response.text
+    sequence = "".join(body.split("\n")[1:])
+    return sequence
+
+
+def region_is_subregion(region1: str, region2: str):
+    start1, end1 = tuple(int(value) for value in region1.split("-"))
+    start2, end2 = tuple(int(value) for value in region2.split("-"))
+    return (start1 >= start2) & (end1 <= end2)
