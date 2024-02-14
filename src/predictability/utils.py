@@ -1,4 +1,6 @@
 import math
+from math import fmod
+import itertools
 import os
 import re
 import requests
@@ -283,7 +285,9 @@ def split_sel(data, mutation_col="mutation", ratio=0.1, seed=42):
     return data
 
 
-def sel_kfold(data, position_col="residue_number", k=10):
+def ssm_kfold(data, position_col="residue_number", k=10, random_seed=None):
+    if random_seed is not None:
+        np.random.seed(random_seed)
     ratio = 1 / k
     k_indices = []
     positions = data[position_col].unique()
@@ -293,7 +297,7 @@ def sel_kfold(data, position_col="residue_number", k=10):
         val_indices = np.array([])
         for position in positions:
             matching_indices = np.argwhere(
-                (data["residue_number"] == position).values
+                (data[position_col] == position).values
             ).flatten()
             if len(matching_indices) == 0:
                 continue
@@ -309,11 +313,23 @@ def sel_kfold(data, position_col="residue_number", k=10):
     return k_indices
 
 
-class ProteinGym:
-    """
-    Currently only support for substitutions.
-    """
+def assign_ssm_folds(data, position_col="residue_number", n_folds=10, random_seed=None):
+    df = data.copy().reset_index()
+    if random_seed is not None:
+        np.random.seed(random_seed)
+    positions = data[position_col].unique()
+    np.random.shuffle(positions)
+    df["ssm_fold"] = pd.Series(dtype="Int64")
+    for position in positions:
+        matching_indices = np.argwhere(
+            (data[position_col] == position).values
+        ).flatten()
+        for fold_number, index in zip(itertools.cycle(np.random.permutation(n_folds)), matching_indices):
+            df.loc[index, "ssm_fold"] = fold_number
+    return df
 
+
+class ProteinGym:
     def __init__(self, proteingym_location, meta_data_path):
         self.proteingym_location = proteingym_location
         self.meta_data_path = meta_data_path

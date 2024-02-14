@@ -63,11 +63,11 @@ def show_structure(pdb_file_path: Union[Path, str], coloring: List[List[str]]):
     return view
 
 
-def get_ngl_colorings(structural_characeteristics: pd.DataFrame, color_map: dict):
+def get_ngl_colorings(structural_characteristics: pd.DataFrame, color_map: dict):
     colorings = {}
     for characteristic in BINARY_RESIDUE_FEATURES:
         colorings[characteristic] = [
             [color_map[int(row[characteristic])], str(row["residue_number"])]
-            for _, row in structural_characeteristics.iterrows()
+            for _, row in structural_characteristics.iterrows()
         ]
     return colorings

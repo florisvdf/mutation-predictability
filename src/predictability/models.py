@@ -120,10 +120,10 @@ class PottsModel:
         return np.sum(embeddings, axis=(1, 2))
 
     @classmethod
-    def load(cls, model_directory: str) -> "PottsModel":
+    def load(cls, model_directory: Union[Path, str]) -> "PottsModel":
         instance = cls(
-            hi=np.load(model_directory / "hi.npy"),
-            jij=np.load(model_directory / "Jij.npy"),
+            hi=np.load(Path(model_directory) / "hi.npy"),
+            jij=np.load(Path(model_directory) / "Jij.npy"),
         )
         return instance
 
@@ -135,6 +135,8 @@ class PottsRegressor:
         msa_path: Union[Path, str] = None,
         encoder: str = "energies",
         regressor_type: str = "ridge",
+        **top_model_kwargs,
+
     ):
         self.potts_path = potts_path
         self.msa_path = msa_path
@@ -147,17 +149,17 @@ class PottsRegressor:
         elif self.potts_path is not None:
             logger.info(f"Loading Potts model locally from: {self.potts_path}")
             self.potts_model = PottsModel.load(self.potts_path)
-        self.top_model = {"ridge": Ridge(), "extra_trees": ExtraTreesRegressor()}[
+        self.top_model = {"ridge": Ridge, "extra_trees": ExtraTreesRegressor}[
             self.regressor_type
-        ]
+        ](**top_model_kwargs)
 
     def fit(
         self,
-        sequences: Union[List[str], pd.Series],
-        targets: Union[np.array, pd.Series],
+        data: pd.DataFrame,
+        property: str,
     ):
-        encodings = self.encode(sequences)
-        self.top_model.fit(encodings, targets)
+        encodings = self.encode(data["sequence"])
+        self.top_model.fit(encodings, data[property])
 
     def encode(self, sequences: Union[List[str], pd.Series]):
         return {
@@ -188,8 +190,8 @@ class PottsRegressor:
             ]
         )
 
-    def predict(self, sequences: Union[List[str], pd.Series]):
-        encodings = self.encode(sequences)
+    def predict(self, data: pd.DataFrame):
+        encodings = self.encode(data["sequence"])
         return self.top_model.predict(encodings)
 
 
@@ -306,9 +308,9 @@ class PartialLeastSquares:
             encodings[i] = oh_sequence
         return encodings
 
-    def fit(self, data: pd.DataFrame, target):
+    def fit(self, data: pd.DataFrame, property: str):
         sequences = data["sequence"].tolist()
-        targets = data[target]
+        targets = data[property]
         encodings = self.encode_sequences(sequences)
         self.pls.fit(encodings, targets)
 
