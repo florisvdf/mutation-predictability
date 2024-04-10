@@ -10,3 +10,25 @@ BINARY_RESIDUE_FEATURES = [
 ]
 DATA_ROOT = Path(__file__).resolve().parent.parent.parent / "data"
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+THREE_TO_SINGLE_LETTER_CODES = {
+    "ALA": "A",
+    "ARG": "R",
+    "ASN": "N",
+    "ASP": "D",
+    "CYS": "C",
+    "GLN": "Q",
+    "GLU": "E",
+    "GLY": "G",
+    "HIS": "H",
+    "ILE": "I",
+    "LEU": "L",
+    "LYS": "K",
+    "MET": "M",
+    "PHE": "F",
+    "PRO": "P",
+    "SER": "S",
+    "THR": "T",
+    "TRP": "W",
+    "TYR": "Y",
+    "VAL": "V",
+}

@@ -1,0 +1,321 @@
+,dataset,model,fold,structural_characteristic,is_member,spearman,mae
+0,amylase,Residue agnostic regressor,0,is_buried,0,0.7387978709209069,0.03322315866505818
+1,amylase,Partial least squares,0,is_buried,0,0.7390117125508863,0.032431342428561036
+2,amylase,Augmented Potts,0,is_buried,0,0.7441459276298552,0.03117121212077448
+3,amylase,RITA regressor,0,is_buried,0,0.8082717256899672,0.02703107168442221
+4,amylase,Residue agnostic regressor,1,is_buried,0,0.7769584518748864,0.03119847566889106
+5,amylase,Partial least squares,1,is_buried,0,0.7461676961535147,0.03268009332962665
+6,amylase,Augmented Potts,1,is_buried,0,0.7671431774372353,0.030732456600121038
+7,amylase,RITA regressor,1,is_buried,0,0.839037853577366,0.02674568888427602
+8,amylase,Residue agnostic regressor,2,is_buried,0,0.6779667488809836,0.03367688438068358
+9,amylase,Partial least squares,2,is_buried,0,0.6677628921948335,0.03366309786768484
+10,amylase,Augmented Potts,2,is_buried,0,0.727669871306996,0.031144894965104926
+11,amylase,RITA regressor,2,is_buried,0,0.7476006808413213,0.02960319049264618
+12,amylase,Residue agnostic regressor,3,is_buried,0,0.7490237334929777,0.030711397312777042
+13,amylase,Partial least squares,3,is_buried,0,0.7535138793510445,0.031457172044261024
+14,amylase,Augmented Potts,3,is_buried,0,0.7627253092874499,0.03139650331586525
+15,amylase,RITA regressor,3,is_buried,0,0.8328486259994371,0.027344209082106483
+16,amylase,Residue agnostic regressor,4,is_buried,0,0.7332317467706003,0.03215889693356113
+17,amylase,Partial least squares,4,is_buried,0,0.6649096449247661,0.03438075781935537
+18,amylase,Augmented Potts,4,is_buried,0,0.7685453960042972,0.030584660622591905
+19,amylase,RITA regressor,4,is_buried,0,0.7652788484077024,0.02926455623011755
+20,amylase,Residue agnostic regressor,5,is_buried,0,0.751330592609332,0.032979628013175145
+21,amylase,Partial least squares,5,is_buried,0,0.6951287787029196,0.03469682311665631
+22,amylase,Augmented Potts,5,is_buried,0,0.7498849190497636,0.03255268327745838
+23,amylase,RITA regressor,5,is_buried,0,0.7830381869758453,0.02758578767914596
+24,amylase,Residue agnostic regressor,6,is_buried,0,0.6384053539061849,0.03639270288867523
+25,amylase,Partial least squares,6,is_buried,0,0.7023907453627369,0.035056745633257495
+26,amylase,Augmented Potts,6,is_buried,0,0.7097449709072724,0.032223653225914306
+27,amylase,RITA regressor,6,is_buried,0,0.7518240002173108,0.028642321969608184
+28,amylase,Residue agnostic regressor,7,is_buried,0,0.7822091262999886,0.03144259133591404
+29,amylase,Partial least squares,7,is_buried,0,0.7628309538371536,0.03114210035514636
+30,amylase,Augmented Potts,7,is_buried,0,0.7822202714488868,0.0292647438121221
+31,amylase,RITA regressor,7,is_buried,0,0.8160881272926349,0.026255793070377932
+32,amylase,Residue agnostic regressor,8,is_buried,0,0.7660958783152052,0.030780094847775018
+33,amylase,Partial least squares,8,is_buried,0,0.7291197219578489,0.03510755145286435
+34,amylase,Augmented Potts,8,is_buried,0,0.7825763702122557,0.02852273443509558
+35,amylase,RITA regressor,8,is_buried,0,0.7896216687536693,0.028039036123426946
+36,amylase,Residue agnostic regressor,9,is_buried,0,0.7469113377610471,0.030781222555999938
+37,amylase,Partial least squares,9,is_buried,0,0.6975847728177396,0.03234930671191707
+38,amylase,Augmented Potts,9,is_buried,0,0.7755609843255009,0.029827094474157424
+39,amylase,RITA regressor,9,is_buried,0,0.7957962814875955,0.026543945512248843
+40,amylase,Residue agnostic regressor,0,is_buried,1,0.5352539903995143,0.02976532586901607
+41,amylase,Partial least squares,0,is_buried,1,0.5709863554875438,0.032914286908104655
+42,amylase,Augmented Potts,0,is_buried,1,0.6103339250933254,0.029953467796153706
+43,amylase,RITA regressor,0,is_buried,1,0.6487429761098154,0.024550578124698595
+44,amylase,Residue agnostic regressor,1,is_buried,1,0.6111375761810364,0.027999909376552855
+45,amylase,Partial least squares,1,is_buried,1,0.59777626394443,0.031054688595389752
+46,amylase,Augmented Potts,1,is_buried,1,0.6778471149250342,0.026582548504963766
+47,amylase,RITA regressor,1,is_buried,1,0.6561225618874303,0.02367915002515966
+48,amylase,Residue agnostic regressor,2,is_buried,1,0.509505657801853,0.02945214326075515
+49,amylase,Partial least squares,2,is_buried,1,0.5207671863061794,0.03607973458119833
+50,amylase,Augmented Potts,2,is_buried,1,0.5180165067461149,0.03113596061893051
+51,amylase,RITA regressor,2,is_buried,1,0.5588607654026211,0.028108208240441912
+52,amylase,Residue agnostic regressor,3,is_buried,1,0.49313509254728327,0.02738459047165678
+53,amylase,Partial least squares,3,is_buried,1,0.4558670881326494,0.033936253944581336
+54,amylase,Augmented Potts,3,is_buried,1,0.5008097719885896,0.027694606749263263
+55,amylase,RITA regressor,3,is_buried,1,0.5402829393463293,0.024287054540185444
+56,amylase,Residue agnostic regressor,4,is_buried,1,0.6000545418763161,0.029710031857778523
+57,amylase,Partial least squares,4,is_buried,1,0.563975795799655,0.03742346500500943
+58,amylase,Augmented Potts,4,is_buried,1,0.6250931226098891,0.029485798357455066
+59,amylase,RITA regressor,4,is_buried,1,0.681092205154877,0.02549902658799137
+60,amylase,Residue agnostic regressor,5,is_buried,1,0.4325608800785809,0.02891730509914551
+61,amylase,Partial least squares,5,is_buried,1,0.44517327415290747,0.033181714133772675
+62,amylase,Augmented Potts,5,is_buried,1,0.4901901469024891,0.028316780498972672
+63,amylase,RITA regressor,5,is_buried,1,0.539857523035292,0.02533109603496525
+64,amylase,Residue agnostic regressor,6,is_buried,1,0.5404555599064346,0.02806420696032395
+65,amylase,Partial least squares,6,is_buried,1,0.45173644065119484,0.029767623085845855
+66,amylase,Augmented Potts,6,is_buried,1,0.5136413014575444,0.026645617115681072
+67,amylase,RITA regressor,6,is_buried,1,0.5778524465726056,0.02422582689213174
+68,amylase,Residue agnostic regressor,7,is_buried,1,0.4805730689565236,0.027648485577986343
+69,amylase,Partial least squares,7,is_buried,1,0.5173580854100334,0.029390099832210338
+70,amylase,Augmented Potts,7,is_buried,1,0.4819806783173568,0.02659336264369915
+71,amylase,RITA regressor,7,is_buried,1,0.6205584386681023,0.025661569079433736
+72,amylase,Residue agnostic regressor,8,is_buried,1,0.5272035896403225,0.027714467410701903
+73,amylase,Partial least squares,8,is_buried,1,0.44516062908977927,0.03289263898054166
+74,amylase,Augmented Potts,8,is_buried,1,0.5301543283607728,0.02937211079424725
+75,amylase,RITA regressor,8,is_buried,1,0.6085055103741628,0.024776542816559007
+76,amylase,Residue agnostic regressor,9,is_buried,1,0.5061034415508232,0.030051410818237152
+77,amylase,Partial least squares,9,is_buried,1,0.5369456660169936,0.03450288643094249
+78,amylase,Augmented Potts,9,is_buried,1,0.5875529388431064,0.029661983425068678
+79,amylase,RITA regressor,9,is_buried,1,0.633184638033406,0.027106491747667234
+80,amylase,Residue agnostic regressor,0,is_connected,0,0.7181568886975533,0.033157092866105395
+81,amylase,Partial least squares,0,is_connected,0,0.7121539477684994,0.03347194128240016
+82,amylase,Augmented Potts,0,is_connected,0,0.7306215485218696,0.032994268378138035
+83,amylase,RITA regressor,0,is_connected,0,0.7551333575046489,0.028185048522333687
+84,amylase,Residue agnostic regressor,1,is_connected,0,0.7555702903513458,0.03098769994925986
+85,amylase,Partial least squares,1,is_connected,0,0.6948761170365135,0.03284693090949227
+86,amylase,Augmented Potts,1,is_connected,0,0.7550520870352108,0.02997412109039527
+87,amylase,RITA regressor,1,is_connected,0,0.7842328814621056,0.025294394881286333
+88,amylase,Residue agnostic regressor,2,is_connected,0,0.7401492928691636,0.032716379475373134
+89,amylase,Partial least squares,2,is_connected,0,0.6720756476595846,0.0373068622988292
+90,amylase,Augmented Potts,2,is_connected,0,0.7220584898460614,0.03613412125684028
+91,amylase,RITA regressor,2,is_connected,0,0.816899649826283,0.028915226835914704
+92,amylase,Residue agnostic regressor,3,is_connected,0,0.7045968479487648,0.03338658212389098
+93,amylase,Partial least squares,3,is_connected,0,0.6632618001361306,0.036994529201607874
+94,amylase,Augmented Potts,3,is_connected,0,0.717129992017688,0.03329592377175338
+95,amylase,RITA regressor,3,is_connected,0,0.7688996356606216,0.02875839438991601
+96,amylase,Residue agnostic regressor,4,is_connected,0,0.7675452155442877,0.03003730225835248
+97,amylase,Partial least squares,4,is_connected,0,0.6981759719522402,0.031656066993523926
+98,amylase,Augmented Potts,4,is_connected,0,0.7569397800395552,0.02921705503215444
+99,amylase,RITA regressor,4,is_connected,0,0.7735654573118957,0.026285308607939855
+100,amylase,Residue agnostic regressor,5,is_connected,0,0.7242127105317333,0.03167782627136455
+101,amylase,Partial least squares,5,is_connected,0,0.6829450505070145,0.033607264226557444
+102,amylase,Augmented Potts,5,is_connected,0,0.7443369376174029,0.03155968577045599
+103,amylase,RITA regressor,5,is_connected,0,0.7622421392500199,0.02841108228011604
+104,amylase,Residue agnostic regressor,6,is_connected,0,0.7594564757178806,0.03130151483256235
+105,amylase,Partial least squares,6,is_connected,0,0.7084856193589815,0.0356838785707612
+106,amylase,Augmented Potts,6,is_connected,0,0.7409350084944757,0.031184484766669192
+107,amylase,RITA regressor,6,is_connected,0,0.8058337867654646,0.027451603395780285
+108,amylase,Residue agnostic regressor,7,is_connected,0,0.691809027928728,0.035006399328287245
+109,amylase,Partial least squares,7,is_connected,0,0.6529893310681274,0.03780567650912689
+110,amylase,Augmented Potts,7,is_connected,0,0.662360077403666,0.03550122516272193
+111,amylase,RITA regressor,7,is_connected,0,0.7526042486807847,0.030362920305214872
+112,amylase,Residue agnostic regressor,8,is_connected,0,0.6856071988287206,0.03416974841799385
+113,amylase,Partial least squares,8,is_connected,0,0.6646432809471983,0.03791978054992123
+114,amylase,Augmented Potts,8,is_connected,0,0.7035897382070356,0.032586599030663105
+115,amylase,RITA regressor,8,is_connected,0,0.7285247086195242,0.02821982725348847
+116,amylase,Residue agnostic regressor,9,is_connected,0,0.7199670379146826,0.030121647600284056
+117,amylase,Partial least squares,9,is_connected,0,0.6669311441480184,0.03407300626947732
+118,amylase,Augmented Potts,9,is_connected,0,0.7091658943020944,0.02981178252574386
+119,amylase,RITA regressor,9,is_connected,0,0.7531152283480923,0.02787164642574102
+120,amylase,Residue agnostic regressor,0,is_connected,1,0.6153081787828841,0.03073656443601036
+121,amylase,Partial least squares,0,is_connected,1,0.6174046391662089,0.031852998850778656
+122,amylase,Augmented Potts,0,is_connected,1,0.6642050999763564,0.028747295632447132
+123,amylase,RITA regressor,0,is_connected,1,0.6933047443511422,0.02611670112553966
+124,amylase,Residue agnostic regressor,1,is_connected,1,0.5942789062776345,0.03172751629624334
+125,amylase,Partial least squares,1,is_connected,1,0.5330278363084965,0.03641226549237729
+126,amylase,Augmented Potts,1,is_connected,1,0.6301153947468401,0.030412765932089157
+127,amylase,RITA regressor,1,is_connected,1,0.6430448327530569,0.02918897329551752
+128,amylase,Residue agnostic regressor,2,is_connected,1,0.6044896932530693,0.03362290773093395
+129,amylase,Partial least squares,2,is_connected,1,0.6584695475950761,0.03271165705770561
+130,amylase,Augmented Potts,2,is_connected,1,0.6724340062832985,0.030562371102663813
+131,amylase,RITA regressor,2,is_connected,1,0.7075637817131488,0.028165004880655126
+132,amylase,Residue agnostic regressor,3,is_connected,1,0.6073049189744933,0.031472701273037716
+133,amylase,Partial least squares,3,is_connected,1,0.5853302708186044,0.034813088654524156
+134,amylase,Augmented Potts,3,is_connected,1,0.6436480643664211,0.03156823438149484
+135,amylase,RITA regressor,3,is_connected,1,0.6722601321568482,0.027483719100219548
+136,amylase,Residue agnostic regressor,4,is_connected,1,0.5368069945146882,0.030242671983471033
+137,amylase,Partial least squares,4,is_connected,1,0.5528631358577087,0.032053414096153865
+138,amylase,Augmented Potts,4,is_connected,1,0.5682021261017749,0.029729922229012
+139,amylase,RITA regressor,4,is_connected,1,0.6465977514701663,0.024472000094675556
+140,amylase,Residue agnostic regressor,5,is_connected,1,0.6138358076210789,0.03164556117201754
+141,amylase,Partial least squares,5,is_connected,1,0.6290096567217136,0.033307825485331864
+142,amylase,Augmented Potts,5,is_connected,1,0.6638452373904682,0.027900628714762097
+143,amylase,RITA regressor,5,is_connected,1,0.6903832027104676,0.025644625780919496
+144,amylase,Residue agnostic regressor,6,is_connected,1,0.5923656362642008,0.03387291811331035
+145,amylase,Partial least squares,6,is_connected,1,0.6089390848994003,0.03407847263354923
+146,amylase,Augmented Potts,6,is_connected,1,0.6673577048637384,0.03041060436435095
+147,amylase,RITA regressor,6,is_connected,1,0.6732220984777417,0.02953442897448621
+148,amylase,Residue agnostic regressor,7,is_connected,1,0.5792331173858305,0.03162406127887642
+149,amylase,Partial least squares,7,is_connected,1,0.6144122028721771,0.032806721291809074
+150,amylase,Augmented Potts,7,is_connected,1,0.6542993184974673,0.031666124792890195
+151,amylase,RITA regressor,7,is_connected,1,0.7016136333721313,0.027417866486860603
+152,amylase,Residue agnostic regressor,8,is_connected,1,0.6250113173500706,0.0317534683538383
+153,amylase,Partial least squares,8,is_connected,1,0.6628921939830983,0.03431804337633018
+154,amylase,Augmented Potts,8,is_connected,1,0.673405914599437,0.03137689049754181
+155,amylase,RITA regressor,8,is_connected,1,0.706881296505085,0.029568787429251325
+156,amylase,Residue agnostic regressor,9,is_connected,1,0.6446528084666479,0.03204366397274903
+157,amylase,Partial least squares,9,is_connected,1,0.61014457266212,0.03529235426409427
+158,amylase,Augmented Potts,9,is_connected,1,0.7200576562206591,0.030628909752186073
+159,amylase,RITA regressor,9,is_connected,1,0.7350283136908956,0.02680678776995158
+160,amylase,Residue agnostic regressor,0,is_close_to_as,0,0.7098109602892384,0.03325224966746868
+161,amylase,Partial least squares,0,is_close_to_as,0,0.6033376733971226,0.03889464863845395
+162,amylase,Augmented Potts,0,is_close_to_as,0,0.7237935466680293,0.03151551212792618
+163,amylase,RITA regressor,0,is_close_to_as,0,0.7631236750338821,0.02879969245565434
+164,amylase,Residue agnostic regressor,1,is_close_to_as,0,0.6932577602072685,0.03484404213416707
+165,amylase,Partial least squares,1,is_close_to_as,0,0.7503287383017422,0.030528635091633283
+166,amylase,Augmented Potts,1,is_close_to_as,0,0.7477489094584825,0.031233408078650177
+167,amylase,RITA regressor,1,is_close_to_as,0,0.767777428627589,0.028269959986498415
+168,amylase,Residue agnostic regressor,2,is_close_to_as,0,0.7295685566225548,0.030443133586495655
+169,amylase,Partial least squares,2,is_close_to_as,0,0.6795899988568006,0.03194894258087784
+170,amylase,Augmented Potts,2,is_close_to_as,0,0.7254835190793609,0.03122893472459919
+171,amylase,RITA regressor,2,is_close_to_as,0,0.7517399842926209,0.02694564761031477
+172,amylase,Residue agnostic regressor,3,is_close_to_as,0,0.6253416234086809,0.03467689720847549
+173,amylase,Partial least squares,3,is_close_to_as,0,0.6377165644815593,0.03496638376059629
+174,amylase,Augmented Potts,3,is_close_to_as,0,0.7084844701222248,0.03120782344025749
+175,amylase,RITA regressor,3,is_close_to_as,0,0.6929303872171718,0.029747320993254767
+176,amylase,Residue agnostic regressor,4,is_close_to_as,0,0.8030869603253541,0.030222891908914334
+177,amylase,Partial least squares,4,is_close_to_as,0,0.7426149570972023,0.032539498313995
+178,amylase,Augmented Potts,4,is_close_to_as,0,0.7937198100406961,0.029773418756644365
+179,amylase,RITA regressor,4,is_close_to_as,0,0.8419313436441307,0.025896572418228073
+180,amylase,Residue agnostic regressor,5,is_close_to_as,0,0.7382218437558835,0.031270941162506644
+181,amylase,Partial least squares,5,is_close_to_as,0,0.7024034980944538,0.03296910120296231
+182,amylase,Augmented Potts,5,is_close_to_as,0,0.769406772046877,0.029414085522612016
+183,amylase,RITA regressor,5,is_close_to_as,0,0.8160796667396147,0.027034032058852575
+184,amylase,Residue agnostic regressor,6,is_close_to_as,0,0.7603612898292419,0.029535089704424675
+185,amylase,Partial least squares,6,is_close_to_as,0,0.7486208418095183,0.03332221699944527
+186,amylase,Augmented Potts,6,is_close_to_as,0,0.7918731076981126,0.029716739599448292
+187,amylase,RITA regressor,6,is_close_to_as,0,0.82270606202347,0.026035503080936422
+188,amylase,Residue agnostic regressor,7,is_close_to_as,0,0.7733866954681843,0.029762133171594953
+189,amylase,Partial least squares,7,is_close_to_as,0,0.6866203436628908,0.033277671258341184
+190,amylase,Augmented Potts,7,is_close_to_as,0,0.7791547330465587,0.0287509286488332
+191,amylase,RITA regressor,7,is_close_to_as,0,0.8045002799641793,0.02527318586505505
+192,amylase,Residue agnostic regressor,8,is_close_to_as,0,0.7216486804963556,0.030516318524972174
+193,amylase,Partial least squares,8,is_close_to_as,0,0.7230113931401392,0.03305583093209957
+194,amylase,Augmented Potts,8,is_close_to_as,0,0.7919339682040754,0.029101387714529414
+195,amylase,RITA regressor,8,is_close_to_as,0,0.8101687544285873,0.025853306378304974
+196,amylase,Residue agnostic regressor,9,is_close_to_as,0,0.7266336076027224,0.0328670843410483
+197,amylase,Partial least squares,9,is_close_to_as,0,0.735783908974671,0.03235998691993483
+198,amylase,Augmented Potts,9,is_close_to_as,0,0.7582463416009692,0.0307662776104338
+199,amylase,RITA regressor,9,is_close_to_as,0,0.7691100648189189,0.02814961592640981
+200,amylase,Residue agnostic regressor,0,is_close_to_as,1,0.6376774522928239,0.03209615900854048
+201,amylase,Partial least squares,0,is_close_to_as,1,0.6157860267961228,0.03247520498314591
+202,amylase,Augmented Potts,0,is_close_to_as,1,0.6658405328002623,0.029901218519476233
+203,amylase,RITA regressor,0,is_close_to_as,1,0.7134951007382822,0.02748273201031743
+204,amylase,Residue agnostic regressor,1,is_close_to_as,1,0.6180892404762862,0.02826994902877577
+205,amylase,Partial least squares,1,is_close_to_as,1,0.6287618035328632,0.03305901003285046
+206,amylase,Augmented Potts,1,is_close_to_as,1,0.6029640385928261,0.029727621806033982
+207,amylase,RITA regressor,1,is_close_to_as,1,0.6538418886501636,0.027887968967067495
+208,amylase,Residue agnostic regressor,2,is_close_to_as,1,0.5998772237915554,0.031468011634940035
+209,amylase,Partial least squares,2,is_close_to_as,1,0.5743970406216973,0.033034290889675
+210,amylase,Augmented Potts,2,is_close_to_as,1,0.5967626192069104,0.02939181787938232
+211,amylase,RITA regressor,2,is_close_to_as,1,0.6882857329826199,0.026507590315048454
+212,amylase,Residue agnostic regressor,3,is_close_to_as,1,0.6075066787385774,0.03376785069824947
+213,amylase,Partial least squares,3,is_close_to_as,1,0.4951932386191793,0.03921257572522847
+214,amylase,Augmented Potts,3,is_close_to_as,1,0.5759400208130825,0.03371696719440737
+215,amylase,RITA regressor,3,is_close_to_as,1,0.692192789648668,0.02784627388252066
+216,amylase,Residue agnostic regressor,4,is_close_to_as,1,0.5531495099631973,0.030836387041851605
+217,amylase,Partial least squares,4,is_close_to_as,1,0.5365013165992673,0.03403058350370942
+218,amylase,Augmented Potts,4,is_close_to_as,1,0.5450530627493035,0.030296271539451518
+219,amylase,RITA regressor,4,is_close_to_as,1,0.5592414288424713,0.029120661012837456
+220,amylase,Residue agnostic regressor,5,is_close_to_as,1,0.5573636804677826,0.034836516987464344
+221,amylase,Partial least squares,5,is_close_to_as,1,0.5526240615642153,0.03761551926423785
+222,amylase,Augmented Potts,5,is_close_to_as,1,0.5614183662253023,0.0358123351457708
+223,amylase,RITA regressor,5,is_close_to_as,1,0.626459622110966,0.031878337437906856
+224,amylase,Residue agnostic regressor,6,is_close_to_as,1,0.7002587443339171,0.03188475662011532
+225,amylase,Partial least squares,6,is_close_to_as,1,0.5856708325841633,0.03698362613625293
+226,amylase,Augmented Potts,6,is_close_to_as,1,0.701200835382247,0.031850665984314276
+227,amylase,RITA regressor,6,is_close_to_as,1,0.7361651784336902,0.02758401182666141
+228,amylase,Residue agnostic regressor,7,is_close_to_as,1,0.649517435159252,0.031247331218872843
+229,amylase,Partial least squares,7,is_close_to_as,1,0.5681052165701013,0.034771339602563706
+230,amylase,Augmented Potts,7,is_close_to_as,1,0.6828097471299538,0.030637865768812757
+231,amylase,RITA regressor,7,is_close_to_as,1,0.7201466495310099,0.027009738743223485
+232,amylase,Residue agnostic regressor,8,is_close_to_as,1,0.543065261654466,0.03614548568124147
+233,amylase,Partial least squares,8,is_close_to_as,1,0.6008521956593494,0.03695651647508095
+234,amylase,Augmented Potts,8,is_close_to_as,1,0.5968157033859932,0.034302021852264754
+235,amylase,RITA regressor,8,is_close_to_as,1,0.6519403143926897,0.02899094657948048
+236,amylase,Residue agnostic regressor,9,is_close_to_as,1,0.614000864966858,0.03378067407749538
+237,amylase,Partial least squares,9,is_close_to_as,1,0.6063710436386455,0.03620873890319439
+238,amylase,Augmented Potts,9,is_close_to_as,1,0.6365734694721301,0.03307327354217185
+239,amylase,RITA regressor,9,is_close_to_as,1,0.6886010525392388,0.02919485070978093
+240,amylase,Residue agnostic regressor,0,is_secondary,0,0.7172195821882348,0.03260139866444637
+241,amylase,Partial least squares,0,is_secondary,0,0.7106095915119159,0.031807077351669974
+242,amylase,Augmented Potts,0,is_secondary,0,0.7360552801147872,0.03126301475117492
+243,amylase,RITA regressor,0,is_secondary,0,0.7124065085397058,0.028331571318503803
+244,amylase,Residue agnostic regressor,1,is_secondary,0,0.6188803751103268,0.03240375698207762
+245,amylase,Partial least squares,1,is_secondary,0,0.6081775821277722,0.03368555564587436
+246,amylase,Augmented Potts,1,is_secondary,0,0.6304671528613047,0.03143608354442415
+247,amylase,RITA regressor,1,is_secondary,0,0.6932158379234529,0.02859755586493512
+248,amylase,Residue agnostic regressor,2,is_secondary,0,0.647105187294188,0.030979237372085983
+249,amylase,Partial least squares,2,is_secondary,0,0.5905580792624993,0.03427864520443738
+250,amylase,Augmented Potts,2,is_secondary,0,0.6836729838612311,0.030315461738581267
+251,amylase,RITA regressor,2,is_secondary,0,0.7155181244937469,0.027069382115536018
+252,amylase,Residue agnostic regressor,3,is_secondary,0,0.6570259407297079,0.03255952565882668
+253,amylase,Partial least squares,3,is_secondary,0,0.6179001326256076,0.033656858378358225
+254,amylase,Augmented Potts,3,is_secondary,0,0.7049230066590967,0.03003222430018464
+255,amylase,RITA regressor,3,is_secondary,0,0.7123162984233132,0.029410679541877077
+256,amylase,Residue agnostic regressor,4,is_secondary,0,0.6416382061531195,0.030394186210698
+257,amylase,Partial least squares,4,is_secondary,0,0.5993946481162202,0.034456460489104515
+258,amylase,Augmented Potts,4,is_secondary,0,0.6298951130179631,0.02960462718196112
+259,amylase,RITA regressor,4,is_secondary,0,0.6723357995611217,0.029310111449183763
+260,amylase,Residue agnostic regressor,5,is_secondary,0,0.653015276087751,0.03349414693515009
+261,amylase,Partial least squares,5,is_secondary,0,0.5246686624927225,0.03902363220489103
+262,amylase,Augmented Potts,5,is_secondary,0,0.62375307602726,0.03256928994275973
+263,amylase,RITA regressor,5,is_secondary,0,0.7058334210349557,0.027696859359071492
+264,amylase,Residue agnostic regressor,6,is_secondary,0,0.7405520298239531,0.029713542490887836
+265,amylase,Partial least squares,6,is_secondary,0,0.6905855753238165,0.032800513030152106
+266,amylase,Augmented Potts,6,is_secondary,0,0.7504177402905907,0.028848998976582912
+267,amylase,RITA regressor,6,is_secondary,0,0.7875517032339305,0.027068803209747045
+268,amylase,Residue agnostic regressor,7,is_secondary,0,0.6181904952886826,0.03123165361602426
+269,amylase,Partial least squares,7,is_secondary,0,0.5337508108221322,0.0357876755727271
+270,amylase,Augmented Potts,7,is_secondary,0,0.5902537838689728,0.03157470159400525
+271,amylase,RITA regressor,7,is_secondary,0,0.6263039290049498,0.03004741090700724
+272,amylase,Residue agnostic regressor,8,is_secondary,0,0.730109030241347,0.030094165275949773
+273,amylase,Partial least squares,8,is_secondary,0,0.6758233591342632,0.034115655721977375
+274,amylase,Augmented Potts,8,is_secondary,0,0.7273875578259844,0.03200078751935213
+275,amylase,RITA regressor,8,is_secondary,0,0.7400530881637638,0.028355652303551925
+276,amylase,Residue agnostic regressor,9,is_secondary,0,0.6112320031449447,0.032389767971282596
+277,amylase,Partial least squares,9,is_secondary,0,0.579013729336324,0.035713087817834395
+278,amylase,Augmented Potts,9,is_secondary,0,0.6515785205488671,0.031195394049257787
+279,amylase,RITA regressor,9,is_secondary,0,0.7014456008952422,0.027771047422963626
+280,amylase,Residue agnostic regressor,0,is_secondary,1,0.7686572575859868,0.02950193132658441
+281,amylase,Partial least squares,0,is_secondary,1,0.7842892877380491,0.03025757201070216
+282,amylase,Augmented Potts,0,is_secondary,1,0.7996778997985627,0.02819349814818764
+283,amylase,RITA regressor,0,is_secondary,1,0.8311109588181356,0.02554708867089514
+284,amylase,Residue agnostic regressor,1,is_secondary,1,0.7068211773820743,0.033201528005341076
+285,amylase,Partial least squares,1,is_secondary,1,0.6839577252954574,0.0354018160219932
+286,amylase,Augmented Potts,1,is_secondary,1,0.7153756810883697,0.03265242673781935
+287,amylase,RITA regressor,1,is_secondary,1,0.7527423773062323,0.028093396932343584
+288,amylase,Residue agnostic regressor,2,is_secondary,1,0.6555081630824,0.03348058714174801
+289,amylase,Partial least squares,2,is_secondary,1,0.6711669318961817,0.032884805953739146
+290,amylase,Augmented Potts,2,is_secondary,1,0.7083797849851916,0.030835456000519484
+291,amylase,RITA regressor,2,is_secondary,1,0.7321946403230021,0.02772772404042689
+292,amylase,Residue agnostic regressor,3,is_secondary,1,0.6838962598580254,0.033324943064253626
+293,amylase,Partial least squares,3,is_secondary,1,0.6426685090629795,0.035067045289226766
+294,amylase,Augmented Potts,3,is_secondary,1,0.7091875928378711,0.032544501784290296
+295,amylase,RITA regressor,3,is_secondary,1,0.7778638412362217,0.0267831510184553
+296,amylase,Residue agnostic regressor,4,is_secondary,1,0.6543446974484906,0.03186085527290969
+297,amylase,Partial least squares,4,is_secondary,1,0.6827294355399962,0.033779391767273854
+298,amylase,Augmented Potts,4,is_secondary,1,0.6753255963971866,0.030438049073174333
+299,amylase,RITA regressor,4,is_secondary,1,0.7153323061513155,0.027031950984165973
+300,amylase,Residue agnostic regressor,5,is_secondary,1,0.6901743031032375,0.034227272453907776
+301,amylase,Partial least squares,5,is_secondary,1,0.7168531043633674,0.03231488304928839
+302,amylase,Augmented Potts,5,is_secondary,1,0.7212447330950353,0.031238214522300575
+303,amylase,RITA regressor,5,is_secondary,1,0.7565379366691309,0.028716158358622325
+304,amylase,Residue agnostic regressor,6,is_secondary,1,0.7370644366617279,0.03243328847901306
+305,amylase,Partial least squares,6,is_secondary,1,0.7333296942323221,0.034458394091035405
+306,amylase,Augmented Potts,6,is_secondary,1,0.7558990300737298,0.030381252912853388
+307,amylase,RITA regressor,6,is_secondary,1,0.801422596510143,0.027525323496236057
+308,amylase,Residue agnostic regressor,7,is_secondary,1,0.7277593697607198,0.03164482605486327
+309,amylase,Partial least squares,7,is_secondary,1,0.7111407020299962,0.03278342193073032
+310,amylase,Augmented Potts,7,is_secondary,1,0.7614837800460326,0.02919388120405088
+311,amylase,RITA regressor,7,is_secondary,1,0.7720201659190525,0.025918694606696945
+312,amylase,Residue agnostic regressor,8,is_secondary,1,0.6547727196679433,0.033252682500345965
+313,amylase,Partial least squares,8,is_secondary,1,0.6575904214534273,0.03516302536471764
+314,amylase,Augmented Potts,8,is_secondary,1,0.6931250809349254,0.0326124767968297
+315,amylase,RITA regressor,8,is_secondary,1,0.719349742508226,0.027926320967245764
+316,amylase,Residue agnostic regressor,9,is_secondary,1,0.7145169173603941,0.031148959843102612
+317,amylase,Partial least squares,9,is_secondary,1,0.6882199167919207,0.0344548396444347
+318,amylase,Augmented Potts,9,is_secondary,1,0.7404405246447637,0.031634507264122404
+319,amylase,RITA regressor,9,is_secondary,1,0.811022867002261,0.025906985778181516

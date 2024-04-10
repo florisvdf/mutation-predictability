@@ -1,20 +1,20 @@
-import math
-from math import fmod
 import itertools
+import math
 import os
 import re
-import requests
-from pathlib import Path
-from typing import Union, List
-from loguru import logger
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Union
+
+import numpy as np
+import pandas as pd
 import prody
+import requests
+from Bio.PDB import PDBParser
 from biopandas.pdb import PandasPdb
 from biotite.sequence import ProteinSequence
 from biotite.sequence.io.fasta import FastaFile
-from Bio.PDB import PDBParser
-import pandas as pd
-import numpy as np
+from loguru import logger
 from scipy.spatial import ConvexHull
 
 from predictability.constants import BINARY_RESIDUE_FEATURES
@@ -152,6 +152,23 @@ class Range:
 
 def read_fasta(path: Union[str, Path]):
     return FastaFile.read(str(path))
+
+def write_fasta(path: Union[str, Path], sequences: Union[str, FastaFile, Dict, List]):
+    file = FastaFile()
+    path = str(path)
+    if isinstance(sequences, str):
+        sequences = read_fasta(sequences)
+    if isinstance(sequences, list):
+        for i, sequence in enumerate(sequences):
+            file[str(i)] = sequence
+    elif isinstance(sequences, dict):
+        for key, sequence in sequences.items():
+            file[key] = sequence
+    elif isinstance(sequences, FastaFile):
+        file = sequences
+    else:
+        raise TypeError("Sequences are not of type FastaFile, Dict or List")
+    file.write(path)
 
 
 def coord_distance(one: pd.Series, other: pd.Series):
@@ -314,7 +331,7 @@ def ssm_kfold(data, position_col="residue_number", k=10, random_seed=None):
 
 
 def assign_ssm_folds(data, position_col="residue_number", n_folds=10, random_seed=None):
-    df = data.copy().reset_index()
+    df = data.copy().reset_index(drop=True)
     if random_seed is not None:
         np.random.seed(random_seed)
     positions = data[position_col].unique()

@@ -1,13 +1,15 @@
+import os
+import re
 import tarfile
-from typing import Union
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Union
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from predictability.models import RITARegressor, PottsRegressor
 from predictability.constants import DATA_ROOT
+from predictability.models import PottsRegressor, RITARegressor
 
 
 def download_artifacts_from_s3(
@@ -64,3 +66,17 @@ def get_potts_emissions(
         np.save(model.potts_model.hi, Path(path) / "hi.npy")
         np.save(model.potts_model.jij, Path(path) / "Jij.npy")
     return path
+
+
+def read_sm_credentials(account_name: str):
+    home_dir = os.environ.get("HOME")
+    with open(f"{home_dir}/.sm_{account_name}", "r") as file:
+        contents = file.read()
+    pattern = r"export\s+(\w+)\s*=\s*(.*)"
+    matches = re.findall(pattern, contents)
+    env_vars = {}
+    for match in matches:
+        key = match[0]
+        value = match[1].strip("\"'")
+        env_vars[key] = value
+    os.environ.update(env_vars)

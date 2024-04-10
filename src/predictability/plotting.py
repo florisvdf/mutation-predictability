@@ -1,7 +1,11 @@
-from typing import List, Union
 from pathlib import Path
-import pandas as pd
+from typing import List, Union
 
+import pandas as pd
+import numpy as np
+
+import matplotlib.pyplot as plt
+import seaborn as sns
 import nglview as nv
 from nglview.color import ColormakerRegistry
 
@@ -41,6 +45,17 @@ feature_mapping = {
     ("Close to active site", "Negative"): "Distant to active site",
 }
 
+features_to_df_descriptors = {
+    "Buried": ("is_buried", 1),
+    "Exposed": ("is_buried", 0),
+    "Many contacts": ("is_connected", 1),
+    "Few contacts": ("is_connected", 0),
+    "Close to active site": ("is_close_to_as", 1),
+    "Distant to active site": ("is_close_to_as", 0),
+    "Part of helix or sheet": ("is_secondary", 1),
+    "Part of loop": ("is_secondary", 0),
+}
+
 color_mapping = {
     "Buried": "#EF476F",
     "Exposed": "#06D6A0",
@@ -71,3 +86,16 @@ def get_ngl_colorings(structural_characteristics: pd.DataFrame, color_map: dict)
             for _, row in structural_characteristics.iterrows()
         ]
     return colorings
+
+def plot_marginal_probabilities(marginal_probabilities, labels):
+    sns.set_style("white")
+    mask = np.tri(8, k=-1).transpose()
+    fig, ax = plt.subplots()
+    sns.heatmap(np.round(marginal_probabilities, 2), annot=True, mask=mask)
+    ax.set_xticks(np.arange(len(labels)))
+    ax.set_yticks(np.arange(len(labels)))
+    ax.set_xticklabels(labels, rotation=45, ha="center")
+    ax.set_yticklabels(labels, rotation=45, va="top")
+    plt.show()
+    fig.tight_layout()
+    return fig, ax

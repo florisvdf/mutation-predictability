@@ -36,6 +36,7 @@ SOURCE  20 EXPRESSION_SYSTEM_PLASMID: PSMT3
 KEYWDS    UBIQUITIN, CONJUGATION, SMALL UBIQUITIN LIKE MODIFER, SMT3, LIGASE    
 EXPDTA    X-RAY DIFFRACTION                                                     
 AUTHOR    A.A.YUNUS,C.D.LIMA                                                    
+REVDAT   5   14-FEB-24 2GRN    1       SEQADV                                   
 REVDAT   4   18-OCT-17 2GRN    1       REMARK                                   
 REVDAT   3   24-FEB-09 2GRN    1       VERSN                                    
 REVDAT   2   20-JUN-06 2GRN    1       JRNL                                     

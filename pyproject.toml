@@ -22,6 +22,7 @@ dependencies = [
     "pandas",
     "plotnine",
     "prody",
+    "ruff",
     "scikit-learn",
     "scipy",
     "torch",
@@ -31,6 +32,9 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff.lint]
+select=["I"]
 
 [build-system]
 requires = [

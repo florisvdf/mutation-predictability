@@ -1,20 +1,19 @@
-from tqdm import tqdm
-from typing import List, Union
 import re
-from loguru import logger
-from pathlib import Path
 import subprocess
+from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import List, Union
 
 import numpy as np
 import pandas as pd
+import torch
+from loguru import logger
 from sklearn.cross_decomposition import PLSRegression
+from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.linear_model import Ridge
 from sklearn.neural_network import MLPRegressor
-from sklearn.ensemble import ExtraTreesRegressor
-
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from tqdm import tqdm
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from predictability.constants import AA_ALPHABET, AA_ALPHABET_GREMLIN
 
@@ -153,13 +152,9 @@ class PottsRegressor:
             self.regressor_type
         ](**top_model_kwargs)
 
-    def fit(
-        self,
-        data: pd.DataFrame,
-        property: str,
-    ):
+    def fit(self, data: pd.DataFrame, target: str):
         encodings = self.encode(data["sequence"])
-        self.top_model.fit(encodings, data[property])
+        self.top_model.fit(encodings, data[target])
 
     def encode(self, sequences: Union[List[str], pd.Series]):
         return {
@@ -252,11 +247,11 @@ class RITARegressor:
     def extract_last_hidden_state_embeddings(self, tokenized_sequence: torch.tensor):
         return self.model(tokenized_sequence).hidden_states[:, -2, :].cpu()
 
-    def fit(self, data, property, embeddings=None):
+    def fit(self, data: pd.DataFrame, target: str, embeddings=None):
         if embeddings is None:
             embeddings = self.embed(data)
         logger.info(f"Fitting {self.top_model_type}")
-        self.top_model.fit(embeddings, data[property])
+        self.top_model.fit(embeddings, data[target])
 
     def predict(self, data, embeddings=None):
         if embeddings is None:
@@ -281,9 +276,9 @@ class ResidueAgnosticRegressor:
         inputs = np.array(list(map(self.assign_mutated, sequences)))
         return inputs
 
-    def fit(self, data, property):
+    def fit(self, data:pd.DataFrame, target: str):
         inputs = self.prepare_inputs(data["sequence"])
-        self.top_model.fit(inputs, data[property])
+        self.top_model.fit(inputs, data[target])
 
     def predict(self, data):
         inputs = self.prepare_inputs(data["sequence"])
@@ -308,9 +303,9 @@ class PartialLeastSquares:
             encodings[i] = oh_sequence
         return encodings
 
-    def fit(self, data: pd.DataFrame, property: str):
+    def fit(self, data: pd.DataFrame, target: str):
         sequences = data["sequence"].tolist()
-        targets = data[property]
+        targets = data[target]
         encodings = self.encode_sequences(sequences)
         self.pls.fit(encodings, targets)
 
