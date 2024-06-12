@@ -85,7 +85,8 @@ class PottsModel:
                         wf.write(line.upper().replace(".", "-"))
         return formatted_msa_path
 
-    def tokenize(self, letter):
+    @staticmethod
+    def tokenize(letter):
         return AA_ALPHABET_GREMLIN.index(letter)
 
     def embed(self, sequences: List[str]):
@@ -115,7 +116,8 @@ class PottsModel:
         predictions = self._calculate_sequence_energy(embeddings)
         return predictions
 
-    def _calculate_sequence_energy(self, embeddings):
+    @staticmethod
+    def _calculate_sequence_energy(embeddings):
         return np.sum(embeddings, axis=(1, 2))
 
     @classmethod
@@ -202,16 +204,20 @@ class RITARegressor:
         self.pooling = pooling
         self.device = device
         self.top_model_kwargs = top_model_kwargs
-        self.model = AutoModelForCausalLM.from_pretrained(
-            "lightonai/RITA_xl", trust_remote_code=True
-        ).to(device)
-        self.tokenizer = AutoTokenizer.from_pretrained("lightonai/RITA_xl")
+        self.model = None
+        self.tokenizer = None
         self.embed_dim = 2048
         self.top_model = {
             "ridge": Ridge,
             "extra_trees": ExtraTreesRegressor,
             "mlp": MLPRegressor,
         }[self.top_model_type](**self.top_model_kwargs)
+
+    def load_rita_model(self):
+        self.model = AutoModelForCausalLM.from_pretrained(
+            "lightonai/RITA_xl", trust_remote_code=True
+        ).to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained("lightonai/RITA_xl")
 
     def embed(self, data):
         """
@@ -249,6 +255,7 @@ class RITARegressor:
 
     def fit(self, data: pd.DataFrame, target: str, embeddings=None):
         if embeddings is None:
+            self.load_rita_model()
             embeddings = self.embed(data)
         logger.info(f"Fitting {self.top_model_type}")
         self.top_model.fit(embeddings, data[target])

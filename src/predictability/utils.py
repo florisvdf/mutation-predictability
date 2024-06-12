@@ -2,6 +2,7 @@ import itertools
 import math
 import os
 import re
+from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Union
@@ -17,6 +18,9 @@ from biotite.sequence.io.fasta import FastaFile
 from loguru import logger
 from scipy.spatial import ConvexHull
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 from predictability.constants import BINARY_RESIDUE_FEATURES
 
 
@@ -25,10 +29,10 @@ class StructuralCharacterizer:
         self,
         filename: str,
         active_site_residues: List[int],
-        reference_sequence: str = None,
+        uniprot_residue_positions: dict,
     ):
         self.filename = filename
-        self.reference_sequence = reference_sequence
+        self.uniprot_residue_positions = uniprot_residue_positions
         self.active_site_residues = active_site_residues
         self.structure = (
             PandasPdb()
@@ -45,11 +49,29 @@ class StructuralCharacterizer:
                 )
             )
         )
+        self.correct_offset()
         self.assign_buriedness()
         self.assign_number_of_contacts()
         self.assign_distance_to_active_site()
         self.assign_secondary_structure()
         self.binarize_structural_characteristics()
+
+    @staticmethod
+    def determine_residue_offset(structure_residue_positions: dict, uniprot_residue_positions: dict):
+        matching_pairs = []
+        for idx_a, char_a in structure_residue_positions.items():
+            for idx_b, char_b in uniprot_residue_positions.items():
+                if char_a == char_b:
+                    matching_pairs.append((idx_a, idx_b))
+        offsets = defaultdict(int)
+        for idx_a, idx_b in matching_pairs:
+            offset = idx_a - idx_b
+            offsets[offset] += 1
+        if offsets:
+            most_frequent_offset = max(offsets, key=offsets.get)
+            return most_frequent_offset
+        else:
+            return None
 
     @staticmethod
     def coord_distance(atom1: pd.Series, atom2: pd.Series):
@@ -62,6 +84,15 @@ class StructuralCharacterizer:
     @staticmethod
     def distance_to_active_site(ca, active_site):
         return min(coord_distance(ca, a) for a in active_site)
+
+    def correct_offset(self):
+        structure_residue_positions = {
+            row["residue_number"]: row["residue_name"] for _, row in self.residue_characteristics.iterrows()
+        }
+        offset = self.determine_residue_offset(structure_residue_positions, self.uniprot_residue_positions)
+        if offset != 0:
+            logger.warning(f"Found an offset of {offset}! Updating structure positions.")
+        self.residue_characteristics["residue_number"] = self.residue_characteristics["residue_number"].map(lambda x: x - offset)
 
     def assign_buriedness(self):
         buriedness = get_buriedness(self.filename).loc[
@@ -220,14 +251,12 @@ def get_buriedness(protein):
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure(protein, protein)[0]
 
-    atoms = []
-    for chain in structure.get_chains():
-        for res in chain:
-            if res.id[0] == "W" or res.id[0].startswith("H_"):
-                continue
-            else:
-                atoms.extend([atom for atom in res.get_atoms()])
+    for res in structure.get_residues():
+        chain = res.parent
+        if res.id[0] != " ":
+            chain.detach_child(res.id)
 
+    atoms = [atom for atom in structure.get_atoms()]
     if not atoms:
         raise ValueError("Could not parse atoms in the pdb file")
 
@@ -345,6 +374,15 @@ def assign_ssm_folds(data, position_col="residue_number", n_folds=10, random_see
             df.loc[index, "ssm_fold"] = fold_number
     return df
 
+def assign_random_folds(data, n_folds=10, random_seed=None):
+    df = data.copy().reset_index(drop=True)
+    if random_seed is not None:
+        np.random.seed(random_seed)
+    folds = [i % n_folds for i in range(len(data))]
+    np.random.shuffle(folds)
+    df["fold"] = folds
+    return df
+
 
 class ProteinGym:
     def __init__(self, proteingym_location, meta_data_path):
@@ -433,3 +471,11 @@ def region_is_subregion(region1: str, region2: str):
     start1, end1 = tuple(int(value) for value in region1.split("-"))
     start2, end2 = tuple(int(value) for value in region2.split("-"))
     return (start1 >= start2) & (end1 <= end2)
+
+def set_matplotlib_styles(font_size=12, title_size=16, label_size=18, tick_size=16):
+    plt.rc("font", size=font_size)
+    plt.rc("axes", titlesize=title_size)
+    plt.rc("axes", labelsize=label_size)
+    plt.rc("xtick", labelsize=tick_size)
+    plt.rc("ytick", labelsize=tick_size)
+    sns.set_style("whitegrid")

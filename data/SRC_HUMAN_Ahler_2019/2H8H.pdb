@@ -19,6 +19,7 @@ SOURCE  10 EXPRESSION_SYSTEM_VECTOR: BACULOVIRUS
 KEYWDS    SRC KINASE, TRANSFERASE                                               
 EXPDTA    X-RAY DIFFRACTION                                                     
 AUTHOR    L.R.OTTERBEIN,R.NORMAN,R.A.PAUPTIT,S.ROWSELL,J.BREED                  
+REVDAT   5   03-APR-24 2H8H    1       REMARK LINK                              
 REVDAT   4   01-JUL-15 2H8H    1       HETSYN                                   
 REVDAT   3   13-JUL-11 2H8H    1       VERSN                                    
 REVDAT   2   24-FEB-09 2H8H    1       VERSN                                    
@@ -26,8 +27,8 @@ REVDAT   1   21-NOV-06 2H8H    0
 JRNL        AUTH   L.F.HENNEQUIN,J.ALLEN,J.BREED,J.CURWEN,M.FENNELL,T.P.GREEN,  
 JRNL        AUTH 2 C.LAMBERT-VAN DER BREMPT,R.MORGENTIN,R.A.NORMAN,A.OLIVIER,   
 JRNL        AUTH 3 L.OTTERBEIN,P.A.PLE,N.WARIN,G.COSTELLO                       
-JRNL        TITL   N-(5-CHLORO-1,3-BENZODIOXOL-4-YL)-7-[2-(4-METHYLPIPERAZIN-1- 
-JRNL        TITL 2 YL)ETHOXY]-5-                                                
+JRNL        TITL   N-(5-CHLORO-1,3-BENZODIOXOL-4-YL)                            
+JRNL        TITL 2 -7-[2-(4-METHYLPIPERAZIN-1-YL)ETHOXY]-5-                     
 JRNL        TITL 3 (TETRAHYDRO-2H-PYRAN-4-YLOXY)QUINAZOLIN-4-AMINE, A NOVEL,    
 JRNL        TITL 4 HIGHLY SELECTIVE, ORALLY AVAILABLE, DUAL-SPECIFIC C-SRC/ABL  
 JRNL        TITL 5 KINASE INHIBITOR.                                            
@@ -40,7 +41,8 @@ REMARK   2 RESOLUTION.    2.20 ANGSTROMS.
 REMARK   3                                                                      
 REMARK   3 REFINEMENT.                                                          
 REMARK   3   PROGRAM     : REFMAC 5.2.0005                                      
-REMARK   3   AUTHORS     : MURSHUDOV,VAGIN,DODSON                               
+REMARK   3   AUTHORS     : MURSHUDOV,SKUBAK,LEBEDEV,PANNU,STEINER,              
+REMARK   3               : NICHOLLS,WINN,LONG,VAGIN                             
 REMARK   3                                                                      
 REMARK   3    REFINEMENT TARGET : MAXIMUM LIKELIHOOD                            
 REMARK   3                                                                      
@@ -178,8 +180,8 @@ REMARK   3  POSITIONS
 REMARK   4                                                                      
 REMARK   4 2H8H COMPLIES WITH FORMAT V. 3.30, 13-JUL-11                         
 REMARK 100                                                                      
-REMARK 100 THIS ENTRY HAS BEEN PROCESSED BY RCSB ON 16-JUN-06.                  
-REMARK 100 THE RCSB ID CODE IS RCSB038061.                                      
+REMARK 100 THIS ENTRY HAS BEEN PROCESSED BY RCSB ON 14-JUN-06.                  
+REMARK 100 THE DEPOSITION ID IS D_1000038061.                                   
 REMARK 200                                                                      
 REMARK 200 EXPERIMENTAL DETAILS                                                 
 REMARK 200  EXPERIMENT TYPE                : X-RAY DIFFRACTION                  
@@ -199,7 +201,7 @@ REMARK 200  OPTICS                         : TOROIDAL FOCUSING MIRROR
 REMARK 200                                                                      
 REMARK 200  DETECTOR TYPE                  : CCD                                
 REMARK 200  DETECTOR MANUFACTURER          : ADSC QUANTUM 4                     
-REMARK 200  INTENSITY-INTEGRATION SOFTWARE : ADSC                               
+REMARK 200  INTENSITY-INTEGRATION SOFTWARE : MOSFLM                             
 REMARK 200  DATA SCALING SOFTWARE          : MOSFLM                             
 REMARK 200                                                                      
 REMARK 200  NUMBER OF UNIQUE REFLECTIONS   : 29365                              
@@ -409,6 +411,7 @@ REMARK 500
 REMARK 500  M RES CSSEQI        PSI       PHI                                   
 REMARK 500    ASN A 112      108.33   -161.73                                   
 REMARK 500    GLU A 115     -151.24   -163.08                                   
+REMARK 500    GLU A 115     -163.85   -178.49                                   
 REMARK 500    ASP A 208      -50.61     68.25                                   
 REMARK 500    ASP A 235     -114.87     41.97                                   
 REMARK 500    ASP A 258       18.74     57.54                                   
@@ -4463,5 +4466,5 @@ CONECT 3639 3623 3638 3640
 CONECT 3640 3613 3639                                                           
 CONECT 3641 3609 3642                                                           
 CONECT 3642 3606 3641                                                           
-MASTER      403    0    2   18   19    0    4    6 3840    1   56   42          
+MASTER      405    0    2   18   19    0    4    6 3840    1   56   42          
 END                                                                             

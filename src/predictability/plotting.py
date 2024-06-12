@@ -56,6 +56,17 @@ features_to_df_descriptors = {
     "Part of loop": ("is_secondary", 0),
 }
 
+df_descriptors_to_features = {
+    ("is_buried", 1): "Buried",
+    ("is_buried", 0): "Exposed",
+    ("is_connected", 1): "Many contacts",
+    ("is_connected", 0): "Few contacts",
+    ("is_close_to_as", 1): "Close to active site",
+    ("is_close_to_as", 0): "Distant to active site",
+    ("is_secondary", 1): "Part of helix or sheet",
+    ("is_secondary", 0): "Part of loop",
+}
+
 color_mapping = {
     "Buried": "#EF476F",
     "Exposed": "#06D6A0",
@@ -87,15 +98,26 @@ def get_ngl_colorings(structural_characteristics: pd.DataFrame, color_map: dict)
         ]
     return colorings
 
-def plot_marginal_probabilities(marginal_probabilities, labels):
-    sns.set_style("white")
+
+def plot_marginal_probabilities(marginal_probabilities, labels, ax=None):
+    return_subplot = ax is None
     mask = np.tri(8, k=-1).transpose()
-    fig, ax = plt.subplots()
-    sns.heatmap(np.round(marginal_probabilities, 2), annot=True, mask=mask)
-    ax.set_xticks(np.arange(len(labels)))
-    ax.set_yticks(np.arange(len(labels)))
-    ax.set_xticklabels(labels, rotation=45, ha="center")
-    ax.set_yticklabels(labels, rotation=45, va="top")
-    plt.show()
-    fig.tight_layout()
-    return fig, ax
+
+    if ax is not None:
+        sns.heatmap(np.round(marginal_probabilities, 2), annot=True, mask=mask, ax=ax)
+    else:
+        fig, ax = plt.subplots()
+        sns.heatmap(np.round(marginal_probabilities, 2), annot=True, mask=mask, ax=ax)
+
+    plt.rcParams["xtick.bottom"] = True
+    plt.rcParams["ytick.left"] = True
+    ax.set_xticks(np.arange(len(labels)) + 0.5, minor=False)
+    ax.set_yticks(np.arange(len(labels)) + 0.5, minor=False)
+    ax.set_xticklabels(labels, rotation=45, ha="right")
+    ax.set_yticklabels(labels, rotation=45, va="center_baseline")
+    ax.tick_params(axis="both", which="major", length=6, width=2, direction="out")
+
+    if return_subplot:
+        plt.show()
+        fig.tight_layout()
+        return fig, ax
