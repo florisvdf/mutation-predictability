@@ -7,19 +7,18 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Union
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import prody
 import requests
+import seaborn as sns
 from Bio.PDB import PDBParser
 from biopandas.pdb import PandasPdb
 from biotite.sequence import ProteinSequence
 from biotite.sequence.io.fasta import FastaFile
 from loguru import logger
 from scipy.spatial import ConvexHull
-
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 from predictability.constants import BINARY_RESIDUE_FEATURES
 

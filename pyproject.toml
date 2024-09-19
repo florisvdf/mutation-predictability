@@ -1,8 +1,7 @@
 [project]
 name = "predictability"
 description = """Small project containing model definitions and utilities for
-reproducing the results of the paper "What makes the effect of protein mutations hard
-to predict?" """
+reproducing the results of the paper "Enzyme structure correlates with variant effect predictability" """
 readme = "README.md"
 requires-python = ">=3.8"
 version = "0.1.0"

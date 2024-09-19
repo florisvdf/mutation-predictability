@@ -1,12 +1,11 @@
 from pathlib import Path
 from typing import List, Union
 
-import pandas as pd
-import numpy as np
-
 import matplotlib.pyplot as plt
-import seaborn as sns
 import nglview as nv
+import numpy as np
+import pandas as pd
+import seaborn as sns
 from nglview.color import ColormakerRegistry
 
 from predictability.constants import BINARY_RESIDUE_FEATURES

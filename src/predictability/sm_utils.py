@@ -34,12 +34,9 @@ def get_rita_embeddings(
         path: Union[Path, str],
         dataset: str,
         device: str = "cpu",
-        training_job_names: dict = None,
-        default_bucket: str = None
+        embeddings_uri: str = None,
 ):
-    if training_job_names is not None:
-        job_name = training_job_names[dataset]
-        embeddings_uri = f"s3://{default_bucket}/{job_name}/output/output.tar.gz"
+    if embeddings_uri is not None:
         download_artifacts_from_s3(embeddings_uri, path, directory="output")
     else:
         data = pd.read_csv(DATA_ROOT / f"{dataset}/data.csv")
@@ -50,14 +47,10 @@ def get_rita_embeddings(
 
 def get_potts_emissions(
         path: Union[Path, str],
-        dataset: str,
         msa_path: Union[Path, str] = None,
-        training_job_names: dict = None,
-        default_bucket: str = None
+        emissions_uri: str = None,
 ):
-    if training_job_names is not None:
-        job_name = training_job_names[dataset]
-        emissions_uri = f"s3://{default_bucket}/{job_name}/output/model.tar.gz"
+    if emissions_uri is not None:
         download_artifacts_from_s3(emissions_uri, path, directory="model")
     else:
         model = PottsRegressor(
