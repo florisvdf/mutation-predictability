@@ -1,8 +1,8 @@
 # mutation-predictability
 
 This repository contains the data and code used to generate results and corresponding 
-figures of the recently released preprint 
-["Enzyme Structure Correlates With Variant Effect Predictability"](https://doi.org/10.1101/2023.09.25.559319).
+figures of the paper
+["Enzyme Structure Correlates With Variant Effect Predictability"](https://doi.org/10.1016/j.csbj.2024.09.007).
 
 - [System requirements](#system-requirements)
 - [Project structure](#project-structure)
