@@ -53,7 +53,7 @@ notebook. Different sample assignment to train and test folds can be achieved by
 executing the notebooks while changing the variable `seed` in the second cell.
 
 
-## License and disclaimer
+# License and disclaimer
 Copyright 2024 International Flavors and Fragrances, Wageningen University & Research
 
 All software is licensed under the MIT License; you may not use this file except in compliance with the MIT license. You may obtain a copy of the MIT license at: https://mit-license.org
